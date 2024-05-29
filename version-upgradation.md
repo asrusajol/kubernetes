@@ -1,6 +1,6 @@
 We are upgradeing Kubernetes Version 1.27 to 1.28
 
-Workar Node Upgradation
+Worker Node Upgradation
 -----------------------
 ### On Master Node
 ```sh
@@ -29,3 +29,6 @@ systemctl restart kubelet
 kubectl get nodes -o wide
 kubectl cordon <worker1>
 ```
+
+Master Node Upgradation
+-----------------------

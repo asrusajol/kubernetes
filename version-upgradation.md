@@ -29,6 +29,7 @@ systemctl restart kubelet
 ```sh
 kubectl get nodes -o wide
 kubectl cordon <worker1>
+kubectl get nodes -o wide
 ```
 
 Master Node Upgradation

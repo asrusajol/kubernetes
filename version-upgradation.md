@@ -6,7 +6,7 @@ Worker Node Upgradation
 ```sh
 kubectl get nodes -o wide
 kubectl cordon <worker1>
-kubectl drain <worker1> --ignore-daemonsets --delete-emptydir-data
+kubectl drain <worker1> --ignore-daemonsets --delete-emptydir-data --force
 kubectl get nodes -o wide
 ```
 Note: change the node name according to yours, mine is worker1

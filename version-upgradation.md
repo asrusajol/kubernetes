@@ -1,3 +1,7 @@
+We are upgradeing Kubernetes Version 1.27 to 1.28
+
+Workar Node Upgradation
+-----------------------
 ### On Master Node
 ```sh
 kubectl get nodes -o wide

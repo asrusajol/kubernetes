@@ -9,6 +9,7 @@ kubectl cordon <worker1>
 kubectl drain <worker1> --ignore-daemonsets --delete-emptydir-data
 kubectl get nodes -o wide
 ```
+Note: change the node name according to yours, mine is worker1
 
 ### On Worker Node
 ```sh

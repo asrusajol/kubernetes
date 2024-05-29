@@ -1,4 +1,4 @@
-We are upgradeing Kubernetes Version 1.27 to 1.28
+We are going to upgrade Kubernetes Version 1.27 to 1.28.
 
 Worker Node Upgradation
 -----------------------

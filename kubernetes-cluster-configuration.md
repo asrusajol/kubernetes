@@ -218,3 +218,35 @@ sudo apt-mark hold kubelet kubeadm kubectl
 ```
 kubeadm version
 ```
+
+On Master Node, Run the Following Command:
+-------------------------------------------
+-------------------------------------------
+### Generate a token to add worker node
+```
+kubeadm token list
+kubeadm token create --print-join-command
+```
+Sample Output: 
+```
+kubeadm join 192.168.20.126:6443 --token 41e6gv.lr6neydmhrknrbdf --discovery-token-ca-cert-hash sha256:6b2205c97a395069ee2dff5dc720f27a6cb76bdbbfcbb8fd3a73341e1656d247 
+```
+On Worker Node, Run the Following Command:
+-------------------------------------------
+-------------------------------------------
+### Execute the generated token to be add to the cluster (Change according to your own token) 
+```
+kubeadm join 192.168.20.126:6443 --token 41e6gv.lr6neydmhrknrbdf --discovery-token-ca-cert-hash sha256:6b2205c97a395069ee2dff5dc720f27a6cb76bdbbfcbb8fd3a73341e1656d247
+```
+On Master Node, Run the Following Commands:
+-------------------------------------------
+-------------------------------------------
+### verify the nodes
+```
+kubectl get nodes -o wide
+```
+Sample Output: 
+```
+master1   Ready    control-plane   106m   v1.27.14   192.168.20.126   <none>        Ubuntu 20.04.2 LTS   5.4.0-137-generic   containerd://1.6.32
+worker1   Ready    <none>          110s   v1.27.14   192.168.20.127   <none>        Ubuntu 20.04.5 LTS   5.4.0-137-generic   containerd://1.6.32
+```

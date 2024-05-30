@@ -46,10 +46,11 @@ EOF
 ```
 
 ### Enable IP forwarding
+```
 sudo cat <<EOF | sudo tee /proc/sys/net/ipv4/ip_forward
 1
 EOF
-
+```
 ### Apply sysctl settings
 ```
 sudo sysctl --system

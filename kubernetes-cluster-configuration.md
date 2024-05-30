@@ -1,4 +1,4 @@
-Confirgureing Kubernetes Cluster with Kubadm
+Configureing Kubernetes Cluster with Kubeadm
 --------------------------------------------
 System Requirements: 
 OS: Ubuntu 20.04 LTS

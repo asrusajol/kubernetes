@@ -26,7 +26,6 @@ bash
 ### Disable swap to prevent Kubernetes issues
 ```
 sudo swapoff -a
-### Verify swap is off
 sudo swapon --show
 ```
 

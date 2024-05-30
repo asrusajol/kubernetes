@@ -1,9 +1,9 @@
 Configurering Kubernetes Cluster with Kubeadm
 --------------------------------------------
 System Requirements: 
-OS: Ubuntu 20.04 LTS
-Core: 2
-Memory: 4 GB
+OS: Ubuntu 20.04 LTS;
+Core: 2;
+Memory: 4 GB;
 Disk: 70 GB
 
 ### Change server's hostname to 'master1'

@@ -140,3 +140,81 @@ kubectl get pods -n kube-system
 On Worker Nodes, Run the Following Commands:
 -------------------------------------------
 -------------------------------------------
+
+### Change server's hostname to 'worker1'
+```
+sudo hostnamectl set-hostname worker1
+bash
+```
+
+### Make sure the following line exists in /etc/hosts file.
+```
+127.0.1.1 worker1
+```
+
+### Make sure the following lines are commented in /etc/fstab file.
+```
+/dev/disk/by-id/dm-uuid-LVM-3FUB4eGR4Sih9Dg3qmmXaWxQJcyGufjiqHJ8AOoU2U0FOPBXSp558oqhW69MEXVq none swap sw 0 0
+/swap.img none swap sw 0 0
+```
+
+### Disable swap to prevent Kubernetes issues
+```
+sudo swapoff -a
+### Verify swap is off
+sudo swapon --show
+```
+
+### Load br_netfilter module for Kubernetes networking
+```
+sudo cat <<EOF | sudo tee /etc/modules-load.d/k8s.conf
+br_netfilter
+EOF
+```
+
+### Configure sysctl settings for Kubernetes networking
+```
+sudo cat <<EOF | sudo tee /etc/sysctl.d/k8s.conf
+net.bridge.bridge-nf-call-ip6tables = 1
+net.bridge.bridge-nf-call-iptables = 1
+EOF
+```
+
+### Enable IP forwarding
+sudo cat <<EOF | sudo tee /proc/sys/net/ipv4/ip_forward
+1
+EOF
+
+### Apply sysctl settings
+```
+sudo sysctl --system
+```
+
+### Download and install Docker
+```
+curl -fsSL https://get.docker.com -o install-docker.sh
+sudo bash install-docker.sh
+```
+
+### Install Kubernetes packages and setup repository
+```
+sudo apt-get install -y apt-transport-https ca-certificates curl
+curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.27/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+sudo echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.27/deb/ /' | sudo tee /etc/apt/sources.list.d/kubernetes.list
+sudo apt-get update
+```
+
+### Install kubelet, kubeadm, and kubectl
+```
+sudo apt-get install -y kubelet kubeadm kubectl
+```
+
+### Hold the versions to prevent upgrades
+```
+sudo apt-mark hold kubelet kubeadm kubectl
+```
+
+### Check kubeadm version
+```
+kubeadm version
+```

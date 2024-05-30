@@ -234,7 +234,7 @@ kubeadm join 192.168.20.126:6443 --token 41e6gv.lr6neydmhrknrbdf --discovery-tok
 On Worker Node, Run the Following Command:
 -------------------------------------------
 -------------------------------------------
-### Execute the generated token to be add to the cluster (Change according to your own token) 
+### Execute the generated token to be added to the cluster (Change according to your own token) 
 ```
 kubeadm join 192.168.20.126:6443 --token 41e6gv.lr6neydmhrknrbdf --discovery-token-ca-cert-hash sha256:6b2205c97a395069ee2dff5dc720f27a6cb76bdbbfcbb8fd3a73341e1656d247
 ```

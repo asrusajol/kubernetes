@@ -137,3 +137,6 @@ tail -f /var/log/syslog
 kubectl get nodes
 kubectl get pods -n kube-system
 ```
+On Worker Nodes, Run the Following Commands:
+-------------------------------------------
+-------------------------------------------

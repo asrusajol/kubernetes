@@ -6,6 +6,9 @@ Core: 2;
 Memory: 4 GB;
 Disk: 70 GB
 
+On Master Node, Run the Following Commands:
+-------------------------------------------
+-------------------------------------------
 ### Change server's hostname to 'master1'
 ```
 sudo hostnamectl set-hostname master1

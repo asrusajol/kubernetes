@@ -32,7 +32,7 @@ sudo swapoff -a
 sudo swapon --show
 ```
 
-Forwarding IPv4 and letting iptables see bridged traffic:
+Forwarding IPv4 and letting iptables see bridged traffic:  
 Ref: https://v1-27.docs.kubernetes.io/docs/setup/production-environment/container-runtimes/#docker
 ```
 cat <<EOF | sudo tee /etc/modules-load.d/k8s.conf
@@ -74,8 +74,8 @@ Ref: https://v1-27.docs.kubernetes.io/docs/setup/production-environment/containe
 curl -fsSL https://get.docker.com -o install-docker.sh
 sudo bash install-docker.sh
 ```
-Install ```cri-dockerd``` adapter to integrate Docker Engine with Kubernetes <br /> 
-Ref: https://github.com/Mirantis/cri-dockerd/releases <br />
+Install ```cri-dockerd``` adapter to integrate Docker Engine with Kubernetes  
+Ref: https://github.com/Mirantis/cri-dockerd/releases
 ```
 wget https://github.com/Mirantis/cri-dockerd/releases/download/v0.3.14/cri-dockerd_0.3.14.3-0.ubuntu-focal_amd64.deb
 sudo dpkg -i cri-dockerd_0.3.14.3-0.ubuntu-focal_amd64.deb

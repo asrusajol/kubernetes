@@ -138,10 +138,9 @@ kubectl get nodes
 kubectl get pods -n kube-system
 ```
 On Worker Nodes, Run the Following Commands:
+-------------------------------------------
+-------------------------------------------
 Note: Here I have been configuring for worker node1 (worker1), same for workder2
--------------------------------------------
--------------------------------------------
-
 ### Change server's hostname to 'worker1'
 ```
 sudo hostnamectl set-hostname worker1

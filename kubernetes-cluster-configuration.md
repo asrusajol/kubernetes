@@ -120,7 +120,7 @@ kubeadm version
 ```
 
 
-### Method2: Initialize the Kubernetes cluster (Docker Engine as Container Runtime)
+### Method1: Initialize the Kubernetes cluster (Docker Engine as Container Runtime)
 Create a file named kubeadm-config.yaml:
 ```
 nano kubeadm-config.yaml
@@ -145,7 +145,7 @@ Run the kubeadm init command with the configuration file:
 sudo kubeadm init --config kubeadm-config.yaml
 ```
 
-### Initialize the Kubernetes cluster (containerd as Container Runtime)
+### Method1: Initialize the Kubernetes cluster (containerd as Container Runtime)
 ```
 sudo kubeadm init
 ```

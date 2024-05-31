@@ -89,6 +89,12 @@ sudo apt-mark hold kubelet kubeadm kubectl
 kubeadm version
 ```
 
+### Backup and restart containerd configuration
+```
+sudo mv /etc/containerd/config.toml /etc/containerd/config.toml.backup
+sudo systemctl restart containerd
+````
+
 On Master Node, Run the Following Command:
 -------------------------------------------
 -------------------------------------------

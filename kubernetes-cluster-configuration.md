@@ -1,5 +1,5 @@
 # Configurering Kubernetes Cluster with Kubeadm
---------------------------------------------
+
 System Requirements: 
 OS: Ubuntu 20.04 LTS;
 Core: 2;
@@ -32,37 +32,60 @@ sudo swapoff -a
 sudo swapon --show
 ```
 
-### Load br_netfilter module for Kubernetes networking
+### Forwarding IPv4 and letting iptables see bridged traffic:
+Ref: https://v1-27.docs.kubernetes.io/docs/setup/production-environment/container-runtimes/#docker
 ```
-sudo cat <<EOF | sudo tee /etc/modules-load.d/k8s.conf
+cat <<EOF | sudo tee /etc/modules-load.d/k8s.conf
+overlay
 br_netfilter
 EOF
 ```
-
-### Configure sysctl settings for Kubernetes networking
 ```
-sudo cat <<EOF | sudo tee /etc/sysctl.d/k8s.conf
+sudo modprobe overlay
+sudo modprobe br_netfilter
+```
+### sysctl params required by setup, params persist across reboots
+```
+cat <<EOF | sudo tee /etc/sysctl.d/k8s.conf
+net.bridge.bridge-nf-call-iptables  = 1
 net.bridge.bridge-nf-call-ip6tables = 1
-net.bridge.bridge-nf-call-iptables = 1
+net.ipv4.ip_forward                 = 1
 EOF
 ```
-
-### Enable IP forwarding
-```
-sudo cat <<EOF | sudo tee /proc/sys/net/ipv4/ip_forward
-1
-EOF
-```
-### Apply sysctl settings
+### Apply sysctl params without reboot
 ```
 sudo sysctl --system
 ```
+### Verify that the br_netfilter, overlay modules are loaded by running the following commands:
+```
+lsmod | grep br_netfilter
+lsmod | grep overlay
+```
+### Verify that the net.bridge.bridge-nf-call-iptables, net.bridge.bridge-nf-call-ip6tables, and net.ipv4.ip_forward system variables are set to 1 in your sysctl config by running the following command:
+```
+sysctl net.bridge.bridge-nf-call-iptables net.bridge.bridge-nf-call-ip6tables net.ipv4.ip_forward
+```
 
-### Download and install Docker
+
+Method1: Docker as a Container Runtimes
+---------------------------------------
 ```
 curl -fsSL https://get.docker.com -o install-docker.sh
 sudo bash install-docker.sh
 ```
+Install ```cri-dockerd``` adapter to integrate Docker Engine with Kubernetes <br /> 
+Ref: https://github.com/Mirantis/cri-dockerd/releases <br />
+```
+wget https://github.com/Mirantis/cri-dockerd/releases/download/v0.3.14/cri-dockerd_0.3.14.3-0.ubuntu-focal_amd64.deb
+sudo dpkg -i cri-dockerd_0.3.14.3-0.ubuntu-focal_amd64.deb
+```
+
+
+
+
+
+
+
 
 ### Install Kubernetes packages and setup repository
 ```

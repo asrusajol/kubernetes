@@ -67,8 +67,9 @@ sysctl net.bridge.bridge-nf-call-iptables net.bridge.bridge-nf-call-ip6tables ne
 ```
 
 
-Method1: Docker as a Container Runtimes
+Metho1: Docker as a Container Runtimes
 ---------------------------------------
+Ref: https://v1-27.docs.kubernetes.io/docs/setup/production-environment/container-runtimes/#docker
 ```
 curl -fsSL https://get.docker.com -o install-docker.sh
 sudo bash install-docker.sh
@@ -80,15 +81,23 @@ wget https://github.com/Mirantis/cri-dockerd/releases/download/v0.3.14/cri-docke
 sudo dpkg -i cri-dockerd_0.3.14.3-0.ubuntu-focal_amd64.deb
 ```
 
-
-
-
-
-
-
-
-### Install Kubernetes packages and setup repository
+Method2: containerd as a Container Runtimes
+-------------------------------------------
+Ref: https://v1-27.docs.kubernetes.io/docs/setup/production-environment/container-runtimes/#containerd
+Backup and restart containerd configuration
 ```
+sudo mv /etc/containerd/config.toml /etc/containerd/config.toml.backup
+sudo systemctl restart containerd
+````
+
+
+
+
+### Mwrhos1: Install Kubernetes packages and setup repository
+Ref: https://v1-27.docs.kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/ <br />
+Note: In releases older than Debian 12 and Ubuntu 22.04, /etc/apt/keyrings does not exist by default; you can create it by running sudo mkdir -m 755 /etc/apt/keyrings
+```
+sudo apt-get update
 sudo apt-get install -y apt-transport-https ca-certificates curl
 curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.27/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
 sudo echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.27/deb/ /' | sudo tee /etc/apt/sources.list.d/kubernetes.list
@@ -110,13 +119,33 @@ sudo apt-mark hold kubelet kubeadm kubectl
 kubeadm version
 ```
 
-### Backup and restart containerd configuration
-```
-sudo mv /etc/containerd/config.toml /etc/containerd/config.toml.backup
-sudo systemctl restart containerd
-````
 
-### Initialize the Kubernetes cluster
+### Method2: Initialize the Kubernetes cluster (Docker Engine as Container Runtime)
+Create a file named kubeadm-config.yaml:
+```
+nano kubeadm-config.yaml
+```
+Add the following content to specify the Docker CRI socket:
+```
+apiVersion: kubeadm.k8s.io/v1beta3
+kind: InitConfiguration
+localAPIEndpoint:
+  advertiseAddress: "0.0.0.0"
+  bindPort: 6443
+nodeRegistration:
+  criSocket: unix:///var/run/cri-dockerd.sock
+---
+apiVersion: kubeadm.k8s.io/v1beta3
+kind: ClusterConfiguration
+networking:
+  podSubnet: "10.244.0.0/16"
+```
+Run the kubeadm init command with the configuration file:
+```
+sudo kubeadm init --config kubeadm-config.yaml
+```
+
+### Initialize the Kubernetes cluster (containerd as Container Runtime)
 ```
 sudo kubeadm init
 ```

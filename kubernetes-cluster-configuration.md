@@ -83,7 +83,7 @@ sudo dpkg -i cri-dockerd_0.3.14.3-0.ubuntu-focal_amd64.deb
 
 Method2: containerd as a Container Runtimes
 -------------------------------------------
-Ref: https://v1-27.docs.kubernetes.io/docs/setup/production-environment/container-runtimes/#containerd
+Ref: https://v1-27.docs.kubernetes.io/docs/setup/production-environment/container-runtimes/#containerd  
 Backup and restart containerd configuration
 ```
 sudo mv /etc/containerd/config.toml /etc/containerd/config.toml.backup

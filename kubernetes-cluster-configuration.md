@@ -67,7 +67,7 @@ sysctl net.bridge.bridge-nf-call-iptables net.bridge.bridge-nf-call-ip6tables ne
 ```
 
 
-Metho1: Docker as a Container Runtimes
+Metho1: Docker Engine as a Container Runtimes
 ---------------------------------------
 Ref: https://v1-27.docs.kubernetes.io/docs/setup/production-environment/container-runtimes/#docker
 ```

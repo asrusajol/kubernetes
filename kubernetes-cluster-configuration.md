@@ -145,7 +145,7 @@ Run the kubeadm init command with the configuration file:
 sudo kubeadm init --config kubeadm-config.yaml
 ```
 
-### Method1: Initialize the Kubernetes cluster (containerd as Container Runtime)
+### Method2: Initialize the Kubernetes cluster (containerd as Container Runtime)
 ```
 sudo kubeadm init
 ```

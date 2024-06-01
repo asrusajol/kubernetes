@@ -93,8 +93,9 @@ sudo systemctl restart containerd
 
 
 
-Mwrhos1: Install Kubernetes packages and setup repository
-Ref: https://v1-27.docs.kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/ <br />
+Install Kubernetes packages and setup repository
+------------------------------------------------
+Ref: https://v1-27.docs.kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/  
 Note: In releases older than Debian 12 and Ubuntu 22.04, /etc/apt/keyrings does not exist by default; you can create it by running sudo mkdir -m 755 /etc/apt/keyrings
 ```
 sudo apt-get update

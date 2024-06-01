@@ -153,13 +153,8 @@ Initialize the Kubernetes cluster (If Method2 is Used)
 sudo kubeadm init
 ```
 
-Check the status of system pods
--------------------------------
-```
-sudo kubectl get pods -n kube-system
-```
-
 To start using your cluster, run the following as a regular user:
+----------------------------------------------------------------
 ```
 mkdir -p $HOME/.kube
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config

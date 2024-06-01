@@ -123,8 +123,21 @@ kubeadm version
 ```
 
 
-Verify the status of the nodes and system pods
+# Add worker node to the cluster 
+### On Master node, generate token
 ```
-kubectl get nodes
-kubectl get pods -n kube-system
+kubeadm token list
+kubeadm token create --print-join-command
 ```
+Sample Output: 
+```
+root@master1:~# kubeadm token create --print-join-command
+kubeadm join 192.168.20.126:6443 --token ixvylp.epn8wky4simkv5qx --discovery-token-ca-cert-hash sha256:3b88ccc1366ae5e0239202b56dbdcca27948fa9cfa65d3218cb50d503f65fb23 
+root@master1:~# 
+```
+### On Worker node, execute the output.
+Note: Pass the domain socket ```unix:///var/run/cri-dockerd.sock``` for Docker Engine with the generated token. 
+```
+kubeadm join 192.168.20.126:6443 --token ixvylp.epn8wky4simkv5qx --discovery-token-ca-cert-hash sha256:3b88ccc1366ae5e0239202b56dbdcca27948fa9cfa65d3218cb50d503f65fb23 --cri-socket unix:///var/run/cri-dockerd.sock
+```
+

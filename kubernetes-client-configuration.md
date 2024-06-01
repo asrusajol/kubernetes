@@ -123,7 +123,7 @@ kubeadm version
 ```
 
 
-# Add worker node to the cluster 
+# Add worker node(s) to the cluster 
 ### On Master node, generate token
 ```
 kubeadm token list
@@ -139,5 +139,18 @@ root@master1:~#
 Note: Pass the domain socket ```unix:///var/run/cri-dockerd.sock``` for Docker Engine with the generated token. 
 ```
 kubeadm join 192.168.20.126:6443 --token ixvylp.epn8wky4simkv5qx --discovery-token-ca-cert-hash sha256:3b88ccc1366ae5e0239202b56dbdcca27948fa9cfa65d3218cb50d503f65fb23 --cri-socket unix:///var/run/cri-dockerd.sock
+```
+### Verify from the Master node. 
+```
+kubectl get nodes -o wide
+```
+Sample Output: 
+```
+root@master1:~# kubectl get nodes -o wide
+NAME      STATUS   ROLES           AGE   VERSION    INTERNAL-IP      EXTERNAL-IP   OS-IMAGE             KERNEL-VERSION      CONTAINER-RUNTIME
+master1   Ready    control-plane   73m   v1.27.14   192.168.20.126   <none>        Ubuntu 20.04.2 LTS   5.4.0-137-generic   docker://26.1.3
+worker1   Ready    <none>          10m   v1.27.14   192.168.20.127   <none>        Ubuntu 20.04.6 LTS   5.4.0-81-generic    docker://26.1.3
+worker2   Ready    <none>          54s   v1.27.14   192.168.20.128   <none>        Ubuntu 20.04.6 LTS   5.4.0-81-generic    docker://26.1.3
+root@master1:~#
 ```
 

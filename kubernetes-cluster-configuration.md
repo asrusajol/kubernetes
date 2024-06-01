@@ -171,7 +171,23 @@ Verify the status of the system pods and nodes
 kubectl get pods -n kube-system
 kubectl get nodes -o wide
 ```
-
+Sample Output  
+```
+root@master1:~# kubectl get pods -n kube-system
+NAME                              READY   STATUS    RESTARTS   AGE
+coredns-5d78c9869d-75cd5          0/1     Pending   0          2m11s
+coredns-5d78c9869d-gxpj7          0/1     Pending   0          2m11s
+etcd-master1                      1/1     Running   0          2m27s
+kube-apiserver-master1            1/1     Running   0          2m27s
+kube-controller-manager-master1   1/1     Running   0          2m27s
+kube-proxy-fnxmr                  1/1     Running   0          2m11s
+kube-scheduler-master1            1/1     Running   0          2m29s
+root@master1:~# 
+root@master1:~# kubectl get nodes -o wide
+NAME      STATUS     ROLES           AGE     VERSION    INTERNAL-IP      EXTERNAL-IP   OS-IMAGE             KERNEL-VERSION      CONTAINER-RUNTIME
+master1   NotReady   control-plane   2m41s   v1.27.14   192.168.20.126   <none>        Ubuntu 20.04.2 LTS   5.4.0-137-generic   docker://26.1.3
+root@master1:~# 
+```
 Install Calico network plugin for the cluster
 ```
 curl https://raw.githubusercontent.com/projectcalico/calico/v3.24.1/manifests/calico.yaml -O

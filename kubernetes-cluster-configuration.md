@@ -169,7 +169,7 @@ export KUBECONFIG=/etc/kubernetes/admin.conf
 Verify the status of the system pods and nodes
 ```
 kubectl get pods -n kube-system
-kubectl get nodes
+kubectl get nodes -o wide
 ```
 
 Install Calico network plugin for the cluster

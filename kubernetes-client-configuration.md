@@ -135,7 +135,7 @@ root@master1:~# kubeadm token create --print-join-command
 kubeadm join 192.168.20.126:6443 --token ixvylp.epn8wky4simkv5qx --discovery-token-ca-cert-hash sha256:3b88ccc1366ae5e0239202b56dbdcca27948fa9cfa65d3218cb50d503f65fb23 
 root@master1:~# 
 ```
-### On Worker node, execute the output.
+### On Worker node, execute the output. (If Docker Engine as Container Runtime)
 Note: Pass the domain socket ```unix:///var/run/cri-dockerd.sock``` for Docker Engine with the generated token. 
 ```
 kubeadm join 192.168.20.126:6443 --token ixvylp.epn8wky4simkv5qx --discovery-token-ca-cert-hash sha256:3b88ccc1366ae5e0239202b56dbdcca27948fa9cfa65d3218cb50d503f65fb23 --cri-socket unix:///var/run/cri-dockerd.sock
@@ -153,4 +153,13 @@ worker1   Ready    <none>          10m   v1.27.14   192.168.20.127   <none>     
 worker2   Ready    <none>          54s   v1.27.14   192.168.20.128   <none>        Ubuntu 20.04.6 LTS   5.4.0-81-generic    docker://26.1.3
 root@master1:~#
 ```
+### On Worker node, execute the output. (If Docker Engine as Container Runtime)
+```
+kubeadm join 192.168.20.126:6443 --token ixvylp.epn8wky4simkv5qx --discovery-token-ca-cert-hash sha256:3b88ccc1366ae5e0239202b56dbdcca27948fa9cfa65d3218cb50d503f65fb23
+```
+### Verify from the Master node. 
+```
+kubectl get nodes -o wide
+```
+
 

@@ -153,7 +153,7 @@ worker1   Ready    <none>          10m   v1.27.14   192.168.20.127   <none>     
 worker2   Ready    <none>          54s   v1.27.14   192.168.20.128   <none>        Ubuntu 20.04.6 LTS   5.4.0-81-generic    docker://26.1.3
 root@master1:~#
 ```
-### On Worker node, execute the output. (If Docker Engine as Container Runtime)
+### On Worker node, execute the output. (If containerd as Container Runtime)
 ```
 kubeadm join 192.168.20.126:6443 --token ixvylp.epn8wky4simkv5qx --discovery-token-ca-cert-hash sha256:3b88ccc1366ae5e0239202b56dbdcca27948fa9cfa65d3218cb50d503f65fb23
 ```

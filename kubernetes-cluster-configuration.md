@@ -154,6 +154,7 @@ sudo kubeadm init
 ```
 
 Check the status of system pods
+-------------------------------
 ```
 sudo kubectl get pods -n kube-system
 ```

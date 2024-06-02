@@ -4,7 +4,7 @@ kubectl create deployment redis-deployment --image=redis
 ```
 ### Specifying Additional Parameters (Imperative)
 ```
-kubectl create deployment nginx-deployment --image=nginx --replicas=3 --port=80
+kubectl create deployment nginx-deployment --image=nginx --replicas=3 
 ```
 ### Verifying the Deployment 
 ```
@@ -14,6 +14,12 @@ kubectl get deployments
 ```
 kubectl describe deployment nginx-deployment
 ```
+### Create YAML menifest file from the imperative command
+
+```sh
+kubectl create deployment nginx-deployment --image=nginx --dry-run=client -o yaml > nginx-deployment.yaml
+```
+
 ### Creating a Deployment with YAML (Declarative)
 ```
 create a YAML file (nginx-deployment.yaml) with the following content:
@@ -61,26 +67,35 @@ kubectl autoscale deployment my-deployment --min=1 --max=10 --cpu-percent=80
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  labels:
+    app: nginx-deployment
   name: nginx-deployment
 spec:
+  replicas: 1
   selector:
     matchLabels:
-      run: nginx
+      app: nginx-deployment
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 25%
+      maxSurge: 25%
   template:
     metadata:
       labels:
-        run: nginx
+        app: nginx-deployment
     spec:
       containers:
-      - name: nginx
-        image: nginx:latest
-        ports:
-        - containerPort: 80
+      - image: nginx
+        name: nginx
         resources:
-          limits:
-            cpu: 500m
           requests:
-            cpu: 200m
+            memory: "64Mi"
+            cpu: "250m"
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+status: {}
 ```
 ### Checking the Status
 ```

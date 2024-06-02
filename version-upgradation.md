@@ -28,7 +28,7 @@ systemctl restart kubelet
 ### On Master Node
 ```sh
 kubectl get nodes -o wide
-kubectl cordon <worker1>
+kubectl uncordon <worker1>
 kubectl get nodes -o wide
 ```
 

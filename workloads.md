@@ -1,6 +1,6 @@
 ### Creating a Deployment (Imperative)
 ```
-kubectl create deployment nginx-deployment --image=nginx
+kubectl create deployment redis-deployment --image=redis
 ```
 ### Specifying Additional Parameters (Imperative)
 ```

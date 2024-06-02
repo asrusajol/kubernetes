@@ -109,12 +109,12 @@ sudo apt-get update
 
 Install kubelet, kubeadm, and kubectl
 ```
-sudo apt-get install -y kubelet kubeadm kubectl
+sudo apt-get install -y kubelet kubeadm
 ```
 
 Hold the versions to prevent upgrades
 ```
-sudo apt-mark hold kubelet kubeadm kubectl
+sudo apt-mark hold kubelet kubeadm
 ```
 
 Check kubeadm version

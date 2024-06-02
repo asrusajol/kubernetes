@@ -14,7 +14,7 @@ kubectl get deployments
 ```
 kubectl describe deployment nginx-deployment
 ```
-### Create YAML menifest file from the imperative command
+### Creating YAML menifest file from the imperative command
 
 ```sh
 kubectl create deployment nginx-deployment --image=nginx --dry-run=client -o yaml > nginx-deployment.yaml

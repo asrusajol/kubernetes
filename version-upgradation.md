@@ -4,6 +4,7 @@ Worker Node Upgradation
 -----------------------
 ### On Master Node
 ```sh
+sudo kubeadm upgrade plan
 kubectl get nodes -o wide
 kubectl cordon <worker1>
 kubectl drain <worker1> --ignore-daemonsets --delete-emptydir-data --force

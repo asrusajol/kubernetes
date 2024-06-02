@@ -59,6 +59,8 @@ systemctl restart kubelet
 ```sh
 kubectl get nodes -o wide
 kubectl uncordon <master1>
+kubectl get pods -n kube-system
+kubectl get nodes -o wide
 ```
 
 

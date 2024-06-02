@@ -1,41 +1,68 @@
-### Creating a Deployment (Imperative)
+# Kubernetes Workloads
+
+1. List Nodes with Detailed Information:
 ```
-kubectl create deployment redis-deployment --image=redis
+kubectl get nodes -o wide
 ```
-### Specifying Additional Parameters (Imperative)
+
+2. Create a Deployment named nginx-deployment with the nginx Image and 2 Replicas:
 ```
-kubectl create deployment nginx-deployment --image=nginx --replicas=3 
+kubectl create deployment nginx-depoyment --image=nginx --replicas=2
 ```
-### Verifying the Deployment 
+
+3. Scale up the nginx-deployment Deployment to 5 Replicas:
+```
+kubectl scale deployment nginx-depoyment --replicas=5
+```
+
+4. Scale down the nginx-deployment Deployment to 3 Replicas:
+```
+kubectl scale deployment nginx-depoyment --replicas=3
+```
+
+5. List Deployments:
 ```
 kubectl get deployments
 ```
-### Viewing Deployment Details
-```
-kubectl describe deployment nginx-deployment
-```
-### Creating YAML menifest file from the imperative command
 
-```sh
-kubectl create deployment nginx-deployment --image=nginx --dry-run=client -o yaml > nginx-deployment.yaml
+6. Describe the nginx-deployment Deployment:
+```
+kubectl describe deployment nginx-depoyment
 ```
 
-### Creating a Deployment with YAML (Declarative)
+7. List Pods:
 ```
-create a YAML file (nginx-deployment.yaml) with the following content:
+kubectl get pods
 ```
-``` 
+
+8. Describe the Pod with Name nginx-deployment-7c5dc5d946-hgszx:
+```
+kubectl describe pods nginx-depoyment-7c5dc5d946-hgszx
+```
+
+9. Create YAML menifest file from imperative command
+```
+kubectl create deployment redis-depoyment --image=redis --replicas=2 --dry-run=client -o yaml > redis-deployment.yaml
+```
+
+10. Create an YAML menifest file and create a deployment.   
+
+```
+nano redis-deployment 
+```
+add the following contents
+```
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: nginx-deployment
-  name: nginx-deployment
+    app: redis-deployment
+  name: redis-deployment
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: nginx-deployment
+      app: redis-deployment
   strategy:
     type: RollingUpdate
     rollingUpdate:
@@ -44,11 +71,11 @@ spec:
   template:
     metadata:
       labels:
-        app: nginx-deployment
+        app: redis-deployment
     spec:
       containers:
-      - image: nginx
-        name: nginx
+      - image: redis:7.2.5
+        name: redis
         resources:
           requests:
             memory: "64Mi"
@@ -57,65 +84,14 @@ spec:
             memory: "128Mi"
             cpu: "500m"
 status: {}
+
 ```
 ```
-kubectl apply -f nginx-deployment.yaml
-```
-### Scaling Up Pods
-```
-kubectl scale deployment my-deployment --replicas=5
-```
-### Scaling Down Pods
-```
-kubectl scale deployment my-deployment --replicas=2
-```
-### kubectl scale deployment my-deployment --replicas=2
-```
-kubectl autoscale deployment my-deployment --min=1 --max=10 --cpu-percent=80
-```
-### Creating a Deployment with YAML (Declarative)
-```
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  labels:
-    app: nginx-deployment
-  name: nginx-deployment
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: nginx-deployment
-  strategy:
-    type: RollingUpdate
-    rollingUpdate:
-      maxUnavailable: 25%
-      maxSurge: 25%
-  template:
-    metadata:
-      labels:
-        app: nginx-deployment
-    spec:
-      containers:
-      - image: nginx
-        name: nginx
-        resources:
-          requests:
-            memory: "64Mi"
-            cpu: "250m"
-          limits:
-            memory: "128Mi"
-            cpu: "500m"
-status: {}
-```
-### Checking the Status
-```
-kubectl get deployment my-deployment
-```
-### To get detailed information about the HPA
-```
-kubectl get hpa
+kubectl apply -f redis-deployment
 ```
 
+11. Retrieve and Save the YAML Manifest of the running nginx-deployment Deployment:
+```
+kubectl get deployment nginx-depoyment -o yaml > nginx-deployment.yaml
+```
 
- 

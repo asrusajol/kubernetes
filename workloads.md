@@ -1,57 +1,57 @@
 # Kubernetes Workloads
 
 1. List Nodes with Detailed Information:
-```
+```bash
 kubectl get nodes -o wide
 ```
 
 2. Create a Deployment named nginx-deployment with the nginx Image and 2 Replicas:
-```
+```bash
 kubectl create deployment nginx-depoyment --image=nginx --replicas=2
 ```
 
 3. Scale up the nginx-deployment Deployment to 5 Replicas:
-```
+```bash
 kubectl scale deployment nginx-depoyment --replicas=5
 ```
 
 4. Scale down the nginx-deployment Deployment to 3 Replicas:
-```
+```bash
 kubectl scale deployment nginx-depoyment --replicas=3
 ```
 
 5. List Deployments:
-```
+```bash
 kubectl get deployments
 ```
 
 6. Describe the nginx-deployment Deployment:
-```
+```bash
 kubectl describe deployment nginx-depoyment
 ```
 
 7. List Pods:
-```
+```bash
 kubectl get pods
 ```
 
 8. Describe the Pod with Name nginx-deployment-7c5dc5d946-hgszx:
-```
+```bash
 kubectl describe pods nginx-depoyment-7c5dc5d946-hgszx
 ```
 
 9. Create YAML menifest file from imperative command
-```
+```bash
 kubectl create deployment redis-depoyment --image=redis --replicas=2 --dry-run=client -o yaml > redis-deployment.yaml
 ```
 
 10. Create an YAML menifest file and create a deployment.   
 
-```
+```bash
 nano redis-deployment 
 ```
 add the following contents
-```
+```bash
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -86,12 +86,12 @@ spec:
 status: {}
 
 ```
-```
+```bash
 kubectl apply -f redis-deployment
 ```
 
 11. Retrieve and Save the YAML Manifest of the running nginx-deployment Deployment:
-```
+```bash
 kubectl get deployment nginx-depoyment -o yaml > nginx-deployment.yaml
 ```
 
